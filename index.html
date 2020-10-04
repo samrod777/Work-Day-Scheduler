@@ -30,13 +30,18 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
-      
+
     </div>
+   
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="lib/moment/moment.min.js"></script>
+    <script>
+      var TodayDate = moment();
+      var currentDayEL = document.getElementById('currentDay');
+      currentDayEL.innerHTML = TodayDate.format('ll');
+      console.log(TodayDate)
+      </script>
 
-    
   </body>
 </html>
