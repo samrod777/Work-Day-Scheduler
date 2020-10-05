@@ -37,7 +37,7 @@
               <tr id="09">
                 <th scope="row" class="align-middle time">09:00</th>
                 <td class="input-cell">
-                  <textarea class="input-area" id="area-09"></textarea>
+                  <textarea class="input-area" id="area-9"></textarea>
                 </td>
                 <td id="save-0900" class="align-middle save-button-cell">
                   <div class="text-center">
@@ -182,11 +182,11 @@
           </table>
       
 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 
-  <script>
+<script>
     var scheduleArr = [];
     var scheduleObj = {};
     var storedSchedule;
@@ -201,12 +201,6 @@ $(document).ready(function() {
     displaySchedule();
     scheduleFocus();
     saveEvent();
-  }
-
-  function dynamicTime() {
-    var currentTime = moment().format('HH:mm:ss');
-    $('#dynamic-time').text(currentTime);
-    setInterval(dynamicTime, 1000);
   }
 
   function scheduleFocus() {
@@ -243,13 +237,10 @@ $(document).ready(function() {
     setInterval(scheduleFocus, 1000);
   }
 
-   function displaySchedule() {
-    savedSchedule = JSON.parse(localStorage.getItem(date));
-    $('.input-area').val('');
-    for (var i = 0; i < savedSchedule.length; i++) {
-      var getKey = Object.keys(savedSchedule[i]);
-      var getValue = Object.values(savedSchedule[i]);
-      $('#area-' + getKey).val(getValue[0]);
+  function displaySchedule() {
+    var timeArray = [ 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    for (var i = 0; i <timeArray.length; i++){
+      $('#area-'+ timeArray[i]).val(localStorage.getItem(timeArray[i]));
     }
   }
 
@@ -264,32 +255,14 @@ $(document).ready(function() {
         .val()
         .trim();
 
-      storedSchedule = JSON.parse(localStorage.getItem(date));
-      scheduleObj = {};
-
-      scheduleObj[trId] = textAreaVal;
-      scheduleArr.push(scheduleObj);
-      localStorage.setItem(date, JSON.stringify(scheduleArr));
-
-      for (var i = 0; i < storedSchedule.length; i++) {
-        if (storedSchedule[i].hasOwnProperty(trId)) {
-          storedSchedule[i][trId] = textAreaVal;
-          scheduleArr = storedSchedule;
-          localStorage.setItem(date, JSON.stringify(scheduleArr));
-          return;
-        }
-      }
+      localStorage.setItem(trId, textAreaVal);
     });
   }
 });
-
- </script>
+</script>
 
     </div>
    
-
-   
-    
     <script>
       var TodayDate = moment();
       var currentDayEL = document.getElementById('currentDay');
