@@ -4,7 +4,7 @@
 
 
 
-![](name-of-giphy.gif)
+![](work day planner GIF.gif)
 
 
 
