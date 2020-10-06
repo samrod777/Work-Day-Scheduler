@@ -186,80 +186,80 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 
-<script>
-    var scheduleArr = [];
-    var scheduleObj = {};
-    var storedSchedule;
-    var savedSchedule;
-    var date = moment().format('LL');
-    day = 0;
+    <script>
+        var scheduleArr = [];
+        var scheduleObj = {};
+        var storedSchedule;
+        var savedSchedule;
+        var date = moment().format('LL');
+        day = 0;
 
-$(document).ready(function() {
-  init();
+    $(document).ready(function() {
+      init();
 
-  function init() {
-    displaySchedule();
-    scheduleFocus();
-    saveEvent();
-  }
+      function init() {
+        displaySchedule();
+        scheduleFocus();
+        saveEvent();
+      }
 
-  function scheduleFocus() {
-    var currentHourInt = parseInt(moment().format('HH'));
+      function scheduleFocus() {
+        var currentHourInt = parseInt(moment().format('HH'));
 
-    var timeIDs = $('#schedule-table tr[id]')
-      .map(function() {
-        return this.id;
-      })
-      .get();
+        var timeIDs = $('#schedule-table tr[id]')
+          .map(function() {
+            return this.id;
+          })
+          .get();
 
-    if (day < 0) {
-      $('.input-area').css('background-color', 'grey');
-    } else if (day > 0) {
-      $('.input-area').css('background-color', 'lightblue');
-    } else {
-      for (var i = 0; i < timeIDs.length; i++) {
-        var timeIDsInt = parseInt(timeIDs[i]);
-        if (timeIDsInt < currentHourInt) {
-          $('#' + timeIDs[i])
-            .find('textarea')
-            .css('background-color', 'grey');
-        } else if (timeIDsInt === currentHourInt) {
-          $('#' + timeIDs[i])
-            .find('textarea')
-            .css('background-color', '#ccffff');
+        if (day < 0) {
+          $('.input-area').css('background-color', 'grey');
+        } else if (day > 0) {
+          $('.input-area').css('background-color', 'lightblue');
         } else {
-          $('#' + timeIDs[i])
-            .find('textarea')
-            .css('background-color', 'lightblue');
+          for (var i = 0; i < timeIDs.length; i++) {
+            var timeIDsInt = parseInt(timeIDs[i]);
+            if (timeIDsInt < currentHourInt) {
+              $('#' + timeIDs[i])
+                .find('textarea')
+                .css('background-color', '#d3d3d3');
+            } else if (timeIDsInt === currentHourInt) {
+              $('#' + timeIDs[i])
+                .find('textarea')
+                .css('background-color', '#ff6961');
+            } else {
+              $('#' + timeIDs[i])
+                .find('textarea')
+                .css('background-color', '#77dd77');
+            }
+          }
+        }
+        setInterval(scheduleFocus, 1000);
+      }
+
+      function displaySchedule() {
+        var timeArray = [ 9, 10, 11, 12, 13, 14, 15, 16, 17]
+        for (var i = 0; i <timeArray.length; i++){
+          $('#area-'+ timeArray[i]).val(localStorage.getItem(timeArray[i]));
         }
       }
-    }
-    setInterval(scheduleFocus, 1000);
-  }
 
-  function displaySchedule() {
-    var timeArray = [ 9, 10, 11, 12, 13, 14, 15, 16, 17]
-    for (var i = 0; i <timeArray.length; i++){
-      $('#area-'+ timeArray[i]).val(localStorage.getItem(timeArray[i]));
-    }
-  }
+      function saveEvent() {
+        $('.save-button').on('click', function() {
+          var trId = $(this)
+            .closest('tr')
+            .attr('id');
+          var textAreaVal = $(this)
+            .closest('tr')
+            .find('textarea')
+            .val()
+            .trim();
 
-  function saveEvent() {
-    $('.save-button').on('click', function() {
-      var trId = $(this)
-        .closest('tr')
-        .attr('id');
-      var textAreaVal = $(this)
-        .closest('tr')
-        .find('textarea')
-        .val()
-        .trim();
-
-      localStorage.setItem(trId, textAreaVal);
+          localStorage.setItem(trId, textAreaVal);
+        });
+      }
     });
-  }
-});
-</script>
+    </script>
 
     </div>
    
@@ -268,8 +268,6 @@ $(document).ready(function() {
       var currentDayEL = document.getElementById('currentDay');
       currentDayEL.innerHTML = TodayDate.format('LLLL');
     </script>
-
-
 
   </body>
 </html>
