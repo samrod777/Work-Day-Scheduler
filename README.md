@@ -2,6 +2,7 @@
 
 # 05 Third-Party APIs: Work Day Scheduler
 
+![work day Scheduler demo picture](Day-scheduler.png)
 
 INTRUDUCTION
 
